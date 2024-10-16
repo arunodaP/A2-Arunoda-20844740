@@ -91,6 +91,29 @@ X-Powered-By: Express
 }
 
 ```
+
+Updated Add Contact with Address
+http post http://localhost/api/contacts name="Peter" address="Dandenong"
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: http://localhost:3000
+Connection: keep-alive
+Content-Length: 123
+Content-Type: application/json; charset=utf-8
+Date: Wed, 16 Oct 2024 12:06:29 GMT
+ETag: W/"7b-P4polAkxNSikIqDZxTpRitKHlrU"
+Server: nginx/1.25.1
+Vary: Origin
+X-Powered-By: Express
+
+{
+    "address": "Dandenong",
+    "createdAt": "2024-10-16T12:06:28.983Z",
+    "id": 7,
+    "name": "Peter",
+    "updatedAt": "2024-10-16T12:06:28.983Z"
+}
+
+
 2 Get contacts API  (GET)
 
 ```bash
@@ -118,11 +141,84 @@ X-Powered-By: Express
 }
 ]
 
+Updated Get Contacts API
+
+http get http://localhost/api/contacts
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: http://localhost:3000
+Connection: keep-alive
+Content-Length: 713
+Content-Type: application/json; charset=utf-8
+Date: Wed, 16 Oct 2024 12:07:41 GMT
+ETag: W/"2c9-29GDB7H7epPLaew8eJAtH3md09w"
+Server: nginx/1.25.1
+Vary: Origin
+X-Powered-By: Express
+
+[
+    {
+        "address": null,
+        "createdAt": "2024-10-16T03:54:48.349Z",
+        "id": 1,
+        "name": "Choiru",
+        "updatedAt": "2024-10-16T03:54:48.349Z"
+    },
+    {
+        "address": null,
+        "createdAt": "2024-10-16T11:14:12.744Z",
+        "id": 4,
+        "name": null,
+        "updatedAt": "2024-10-16T11:14:12.744Z"
+    },
+    {
+        "address": null,
+        "createdAt": "2024-10-16T11:21:24.360Z",
+        "id": 5,
+        "name": "Arunoda",
+        "updatedAt": "2024-10-16T11:21:24.360Z"
+    },
+    {
+        "address": null,
+        "createdAt": "2024-10-16T11:24:38.860Z",
+        "id": 6,
+        "name": null,
+        "updatedAt": "2024-10-16T11:24:38.860Z"
+    },
+    {
+        "address": "Sydney",
+        "createdAt": "2024-10-16T04:56:24.547Z",
+        "id": 2,
+        "name": "Arunoda",
+        "updatedAt": "2024-10-16T11:54:48.741Z"
+    },
+    {
+        "address": "Dandenong",
+        "createdAt": "2024-10-16T12:06:28.983Z",
+        "id": 7,
+        "name": "Peter",
+        "updatedAt": "2024-10-16T12:06:28.983Z"
+    }
+]
 
 ```
 3. Show/create the API commmand to delete the contacts (DELETE)
 
 ```bash
+http delete http://localhost/api/contacts/3
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: http://localhost:3000
+Connection: keep-alive
+Content-Length: 47
+Content-Type: application/json; charset=utf-8
+Date: Wed, 16 Oct 2024 11:50:59 GMT
+ETag: W/"2f-i0D5Qo4IGfH+OpTTITmyTnSzFvU"
+Server: nginx/1.25.1
+Vary: Origin
+X-Powered-By: Express
+
+{
+    "message": "Contact was deleted successfully!"
+}
 
 
 
@@ -132,8 +228,79 @@ X-Powered-By: Express
 
 4. Show/create the API command to edit the contacts (PUT)
 ```
-http get http://localhost/api/contacts/1/phones
+curl -X PUT http://localhost/api/contacts/2      -H "Content-Type: application/json"      -d '{"address": "Sydney"}'
+{"message":"Contact was updated successfully."}
 
 ```
 
 ### Phone API
+1. Create Phone
+curl -X POST http://localhost/api/contacts/1/phones      -H "Content-Type: application/json"      -d '{"number": "1234567890", "name": "Choiru", "phone_type": "Work"}'
+
+{"id":3,"name":"Choiru","number":"1234567890","contactId":1,"phone_type":"Mobile","updatedAt":"2024-10-16T11:48:32.806Z","createdAt":"2024-10-16T11:48:32.806Z"}
+
+2. Get Phone 
+http get http://localhost/api/contacts/1/phones
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: http://localhost:3000
+Connection: keep-alive
+Content-Length: 480
+Content-Type: application/json; charset=utf-8
+Date: Wed, 16 Oct 2024 11:58:04 GMT
+ETag: W/"1e0-yAHm3HtUHtYQnQtQPMcbdAsczys"
+Server: nginx/1.25.1
+Vary: Origin
+X-Powered-By: Express
+
+[
+    {
+        "contactId": 1,
+        "createdAt": "2024-10-16T11:43:48.646Z",
+        "id": 1,
+        "name": "Choiru",
+        "number": "1234567890",
+        "phone_type": "Work",
+        "updatedAt": "2024-10-16T11:43:48.646Z"
+    },
+    {
+        "contactId": 1,
+        "createdAt": "2024-10-16T11:44:30.960Z",
+        "id": 2,
+        "name": "Choiru",
+        "number": "1234567890",
+        "phone_type": "Work",
+        "updatedAt": "2024-10-16T11:44:30.960Z"
+    },
+    {
+        "contactId": 1,
+        "createdAt": "2024-10-16T11:48:32.806Z",
+        "id": 3,
+        "name": "Choiru",
+        "number": "1234567890",
+        "phone_type": "Mobile",
+        "updatedAt": "2024-10-16T11:48:32.806Z"
+    }
+]
+
+3. Update Phone
+curl -X PUT http://localhost/api/contacts/1/phones/1      -H "Content-Type: application/json"      -d '{"number": 5674839,"phone_type":"Home"}'
+{"message":"Phone was updated successfully."}
+
+4. Delete Phone
+http delete http://localhost/api/contacts/1/phones/3
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: http://localhost:3000
+Connection: keep-alive
+Content-Length: 45
+Content-Type: application/json; charset=utf-8
+Date: Wed, 16 Oct 2024 12:03:58 GMT
+ETag: W/"2d-FdOer7L1Hk5YcQlrlpn01BrNJmA"
+Server: nginx/1.25.1
+Vary: Origin
+X-Powered-By: Express
+
+{
+    "message": "Phone was deleted successfully!"
+}
+
+

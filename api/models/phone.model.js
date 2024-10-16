@@ -18,7 +18,7 @@ module.exports = (sequelize, Sequelize) => {
                 key: 'id',
             }
         },
-        phoneType:{
+        phone_type:{
             type:Sequelize.STRING
         }
     });
