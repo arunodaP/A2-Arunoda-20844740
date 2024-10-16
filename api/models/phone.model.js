@@ -17,6 +17,9 @@ module.exports = (sequelize, Sequelize) => {
                 model: 'contacts',
                 key: 'id',
             }
+        },
+        phoneType:{
+            type:Sequelize.STRING
         }
     });
   

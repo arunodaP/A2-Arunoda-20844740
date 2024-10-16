@@ -7,7 +7,8 @@ exports.create = (req, res) => {
     const phone = {
         name: req.body.name,
         number: req.body.number,
-        contactId: parseInt(req.params.contactId)
+        contactId: parseInt(req.params.contactId),
+        phoneType:req.body.phoneType
     };
 
     Phones.create(phone)
